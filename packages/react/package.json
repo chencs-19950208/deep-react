@@ -4,6 +4,9 @@
   "description": "react 公用方法",
   "module": "index.ts",
   "keywords": [],
+  "dependencies": {
+    "shared": "workspace:*"
+  },
   "author": "",
   "license": "ISC"
 }
