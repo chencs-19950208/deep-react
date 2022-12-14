@@ -29,45 +29,45 @@ const ReactElement = function (
 
 // jsx 方法
 export const jsx = (type: ElementType, config: any, ...children: any) => {
-  let key: Key = null;
-  const props: Props = {};
-  let ref: Ref = null;
+	let key: Key = null;
+	const props: Props = {};
+	let ref: Ref = null;
 
-  for(const prop in config) {
-    const val = config[prop];
+	for (const prop in config) {
+		const val = config[prop];
 
-    if (prop === 'key') {
-      if (val !== undefined) {
-        key = '' + val;
-      }
+		if (prop === 'key') {
+			if (val !== undefined) {
+				key = '' + val;
+			}
 
-      continue;
-    }
+			continue;
+		}
 
-    if (prop === 'ref') {
-      if (val !== undefined) {
-        ref = val;
-      }
+		if (prop === 'ref') {
+			if (val !== undefined) {
+				ref = val;
+			}
 
-      continue;
-    }
+			continue;
+		}
 
-    // 属于自己的属性
-    if ({}.hasOwnProperty.call(config, prop)) {
-      props[prop] = val;
-    }
-  }
+		// 属于自己的属性
+		if ({}.hasOwnProperty.call(config, prop)) {
+			props[prop] = val;
+		}
+	}
 
-  const childrenLength = children.length;
+	const childrenLength = children.length;
 
-	if(childrenLength) {
+	if (childrenLength) {
 		// length = 1 child, length > 2 [child, child, child.....]
-		if(childrenLength === 1) {
+		if (childrenLength === 1) {
 			props.children = children[0];
 		} else {
 			props.children = children;
 		}
-	};
+	}
 
 	return ReactElement(type, key, ref, props);
 };
