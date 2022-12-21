@@ -1,8 +1,8 @@
-export type WorkTag = 
-  | typeof FunctionComponent
-  | typeof HostRoot
-  | typeof HostComponent
-  | typeof HostText;
+export type WorkTag =
+	| typeof FunctionComponent
+	| typeof HostRoot
+	| typeof HostComponent
+	| typeof HostText;
 
 // 函数式组件
 export const FunctionComponent = 0;
