@@ -9,7 +9,7 @@ function prepareFreshStack(fiber: FiberNode) {
 	workInProgress = fiber;
 }
 
-function renderRoot(root: FiberNode) {
+export function renderRoot(root: FiberNode) {
 	// 初始化，让 workInProgress 指向第一个fiberNode节点
 	prepareFreshStack(root);
 
