@@ -1,3 +1,3 @@
 export const updateQueue = () => {
-  console.log('//updateQueue')
+	console.log('//updateQueue');
 };
