@@ -12,3 +12,6 @@ export interface ReactElement {
 	props: Props;
 	__mark: string;
 }
+
+// 触发更新方式的类型 兼容老旧触发方式
+export type Action<State> = State | ((prevState: State) => State);
