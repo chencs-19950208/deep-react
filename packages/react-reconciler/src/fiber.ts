@@ -3,7 +3,7 @@ import { WorkTag } from './workTags';
 import { Flags, NoFlags } from './fiberFlags';
 
 // FiberNode 节点定义，一个fiberNode 就是一个工作单元
-// JSX => React Element => fiberNode => DOMElement 
+// JSX => React Element => fiberNode => DOMElement
 // React Element 与fiberNode,进行对比，产生子fiberNode
 /*
 	众多fiberNode节点按照层级关系构成一个树，一共会存在两个树，
@@ -42,7 +42,7 @@ export class FiberNode {
 		this.type = null;
 
 		// 构成树状结构
-		this.return = null; // 指向父fiberNode 
+		this.return = null; // 指向父fiberNode
 		this.sibling = null; // 指向兄弟fiberNode
 		this.child = null; // 指向子fiberNode
 		this.index = 0; // 多个同级节点，index标识顺序
@@ -51,7 +51,7 @@ export class FiberNode {
 
 		// 作为工作单元
 		this.pendingProps = pendingProps; // 这个节点工作单元刚开始工作的props
-		this.memoizedProps = null; // 工作完之后，工作单元应该的props 
+		this.memoizedProps = null; // 工作完之后，工作单元应该的props
 
 		this.alternate = null; // 标识current树 workInProgress树
 
