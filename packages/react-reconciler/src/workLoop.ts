@@ -4,12 +4,12 @@ import { FiberNode } from './fiber';
 
 let workInProgress: FiberNode | null = null; // 记录当前正在工作的fiberNode
 
-// 初始化方法
+// 初始化方法，赋值第一个fiberNode
 function prepareFreshStack(fiber: FiberNode) {
 	workInProgress = fiber;
 }
 
-function renderRoot(root: FiberNode) {
+export function renderRoot(root: FiberNode) {
 	// 初始化，让 workInProgress 指向第一个fiberNode节点
 	prepareFreshStack(root);
 
@@ -33,8 +33,9 @@ function workLoop() {
 	}
 }
 
+//
 function performUnitOfWork(fiber: FiberNode) {
-	const next = beginWork(fiber);
+	const next = beginWork(fiber); // 子fiberNode， 或者 null ,null代表见底了
 
 	// beginWork执行完了之后代表这个节点执行完了需要生成最终的节点props
 	fiber.memoizedProps = fiber.pendingProps;
