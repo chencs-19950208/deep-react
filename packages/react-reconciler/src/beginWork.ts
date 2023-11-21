@@ -6,22 +6,22 @@ import { HostComponent, HostRoot, HostText } from './workTags';
 // 返回子fiberNode
 export const beginWork = (wip: FiberNode) => {
 	// ReactElement 与 fiberNode 比较, 生成子fiberNode
-	switch(wip.tag) {
+	switch (wip.tag) {
 		case HostRoot:
 			/**
 			 * 计算状态最新值
 			 * 创建子fiberNode
 			 */
-		
+
 			return updateHostRoot(wip);
 		case HostComponent:
 		case HostText:
 			return null;
-		default: 
-			if(__DEV__) {
+		default:
+			if (__DEV__) {
 				console.warn('beginWork 未实现的类型');
 			}
-	};
+	}
 };
 
 function updateHostRoot(wip: FiberNode) {
@@ -37,7 +37,7 @@ function updateHostRoot(wip: FiberNode) {
 	// @ts-ignore TODO
 	reconcilerChildren(wip, nextChild);
 	return wip.child;
-};
+}
 
 function updateHostComponent(wip: FiberNode) {
 	const nextProps = wip.memoizedProps;
@@ -51,4 +51,4 @@ function updateHostComponent(wip: FiberNode) {
 function reconcilerChildren(wip: FiberNode) {
 	const nextProps = wip.pendingProps;
 	// const nextChildren = nextProps.
-};
+}
