@@ -1,15 +1,41 @@
 import { beginWork } from './beginWork';
 import { completeWork } from './completeWork';
-import { FiberNode } from './fiber';
+import { FiberNode, FiberRootNode, createWorkInProgress } from './fiber';
+import { HostRoot } from './workTags';
 
 let workInProgress: FiberNode | null = null; // 记录当前正在工作的fiberNode
 
 // 初始化方法，赋值第一个fiberNode
-function prepareFreshStack(fiber: FiberNode) {
-	workInProgress = fiber;
+function prepareFreshStack(root: FiberRootNode) {
+	// workInProgress = fiber;
+	workInProgress = createWorkInProgress(root.current, {});
 }
 
-export function renderRoot(root: FiberNode) {
+// fiber 中调度更新
+export function scheduleUpdateOnFiber(fiber: FiberNode) {
+	// TODO 调度功能
+	const root = markUpdateFromToFiber(fiber);
+	renderRoot(root);
+}
+
+// 从更新节点，一直递归到fiberRootNode. (根节点)
+export function markUpdateFromToFiber(fiber: FiberNode) {
+	let node = fiber;
+	let parent = fiber.return; // 父节点
+
+	while (parent !== null) {
+		node = parent;
+		parent = node.return;
+	}
+
+	if (node.tag === HostRoot) {
+		return node.stateNode; // 根节点
+	}
+
+	return null;
+}
+
+export function renderRoot(root: FiberRootNode) {
 	// 初始化，让 workInProgress 指向第一个fiberNode节点
 	prepareFreshStack(root);
 
@@ -20,7 +46,10 @@ export function renderRoot(root: FiberNode) {
 			break;
 		} catch (e) {
 			// 出现错误，抛出错误以及充值workInProgress
-			console.warn('workLoop 发生错误', e);
+			if (__DEV__) {
+				// 开发环境
+				console.warn('workLoop 发生错误', e);
+			}
 			workInProgress = null;
 		}
 	} while (true);
@@ -44,6 +73,7 @@ function performUnitOfWork(fiber: FiberNode) {
 	if (next === null) {
 		completeUnitOfWork(fiber);
 	} else {
+		// @ts-ignore
 		workInProgress = next; // workInProgress 记录，将继续执行workLoop
 	}
 }
