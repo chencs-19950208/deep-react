@@ -5,7 +5,7 @@ import {
 	Ref,
 	Props,
 	ReactElement,
-	ElementType
+	ReactElementType
 } from 'shared/ReactTypes';
 
 // ReactElement
@@ -28,7 +28,7 @@ const ReactElement = function (
 };
 
 // jsx 方法
-export const jsx = (type: ElementType, config: any, ...children: any) => {
+export const jsx = (type: ReactElementType, config: any, ...children: any) => {
 	let key: Key = null;
 	const props: Props = {};
 	let ref: Ref = null;
@@ -72,7 +72,7 @@ export const jsx = (type: ElementType, config: any, ...children: any) => {
 	return ReactElement(type, key, ref, props);
 };
 
-export const jsxDEV = (type: ElementType, config: any) => {
+export const jsxDEV = (type: ReactElementType, config: any) => {
 	let key: Key = null;
 	const props: Props = {};
 	let ref: Ref = null;
